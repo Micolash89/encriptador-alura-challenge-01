@@ -23,17 +23,19 @@
 
     function encriptar_mensaje() {
 
-        const length = mensaje.value.length;
+        const cadena = mensaje.value;
 
-        if (!length)
+        if (!cadena.length) return;
+
+        if (!validarMensaje(cadena)) {
+            alert("Solo letras minúsculas y sin acentos");
+            mensaje.value = '';
             return;
-
-        const cadena = mensaje.value.toLowerCase();
-
+        }
 
         let newCadena = '';
 
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < cadena.length; i++) {
 
             const char = cadena.charAt(i);
 
@@ -53,7 +55,6 @@
                 case 'u':
                     newCadena += 'ufat';
                     break;
-
                 default:
                     newCadena += char;
                     break;
@@ -61,33 +62,66 @@
 
         }
 
-        div_container.style.display = 'none';
+        mensajeEncriptado(newCadena);
 
-        mensajeResuelto.textContent = newCadena;
-
-        copiar.style.display = 'block';
-
-        resolved.style.justifyContent = 'space-between'
     }
 
     function desencriptar_mensaje() {
 
-        if (!mensaje.value.length) return;
+        let cadena = mensaje.value;
 
-        let cadena = mensaje.value.toLowerCase();
+        if (!cadena.length) return;
 
-        cadena = cadena.replaceAll('ai', 'a');
-        cadena = cadena.replaceAll('enter', 'e');
-        cadena = cadena.replaceAll('imes', 'i');
-        cadena = cadena.replaceAll('ober', 'o');
-        cadena = cadena.replaceAll('ufat', 'u');
+        if (!validarMensaje(cadena)) {
+            alert("Solo letras minúsculas y sin acentos");
+            mensaje.value = '';
+            return;
+        }
+
+        if (cadena.includes('ai', 0))
+            cadena = cadena.replaceAll('ai', 'a');
+
+        if (cadena.includes('enter', 0))
+            cadena = cadena.replaceAll('enter', 'e');
+
+        if (cadena.includes('imes', 0))
+            cadena = cadena.replaceAll('imes', 'i');
+
+        if (cadena.includes('ober', 0))
+            cadena = cadena.replaceAll('ober', 'o');
+
+        if (cadena.includes('ufat', 0))
+            cadena = cadena.replaceAll('ufat', 'u');
+
+        mensajeEncriptado(cadena);
+
+    }
+
+    function mensajeEncriptado(msj) {
+
+        mensajeResuelto.textContent = msj;
 
         div_container.style.display = 'none';
 
-        mensajeResuelto.textContent = cadena;
-
         copiar.style.display = 'block';
 
+        resolved.style.justifyContent = 'space-between'
+
+        mensaje.value = '';
+
+    }
+
+    function validarMensaje(msj) {
+
+        const acentosNumeros = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ü', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+        for (let i = 0; i < msj.length; i++) {
+            if (acentosNumeros.includes(msj.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 })();
