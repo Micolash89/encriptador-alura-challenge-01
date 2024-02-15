@@ -1,10 +1,6 @@
 # Alura LATAM Challenge
 
----
-
 ## **_Desafio 1_**: Construye el encriptador con HTML y CSS
-
----
 
 ### Deploy Github Pages: https://micolash89.github.io/encriptador-alura-challenge-01/
 
@@ -64,9 +60,7 @@ gaitober" => "gato"<br>
 
 - **desktop**
   ![desktop](img/desktop.PNG)
-  <br>
-- **Tablet**
+- **Tablet**<br>
   ![tablet](img/tablet.PNG)
-  <br>
-- **Mobile**
+- **Mobile**<br>
   ![mobile](img/celular.PNG)
